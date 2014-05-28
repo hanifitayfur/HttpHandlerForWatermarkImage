@@ -22,24 +22,26 @@ namespace WatermarkingImage
                 return imageBytes;
             }
 
-            Image image = Image.FromFile(path);
-            var bmp = new Bitmap(image);
-            Graphics graphics = Graphics.FromImage(bmp);
-
-            graphics.DrawImage(image, 0, 0, image.Width, image.Height);
-
-            var font = new Font("Calibri", 15);
-            var brush = new SolidBrush(Color.OrangeRed);
-
-            var pointF = new PointF
+            using (Image image = Image.FromFile(path))
             {
-                X = 160,
-                Y = 60
-            };
+                var bmp = new Bitmap(image);
+                using (Graphics graphics = Graphics.FromImage(bmp))
+                {
+                    graphics.DrawImage(image, 0, 0, image.Width, image.Height);
 
-            graphics.DrawString(_watermarkText, font, brush, pointF);
+                    var font = new Font("Calibri", 15);
+                    var brush = new SolidBrush(Color.OrangeRed);
 
-            imageBytes = SaveImageInMemory(image);
+                    var pointF = new PointF
+                    {
+                        X = 160,
+                        Y = 60
+                    };
+
+                    graphics.DrawString(_watermarkText, font, brush, pointF);
+                }
+                imageBytes = SaveImageInMemory(image);
+            }
             return imageBytes;
         }
 
