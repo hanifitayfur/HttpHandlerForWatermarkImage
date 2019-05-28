@@ -6,10 +6,13 @@ Installation
 
 PM> Install-Package WatermarkingImage
 
+
+
 Configuration
 =============
 
 Create a new class that is derived from ImageHandler class.
+
 
 ```
  public class SampleImageHelper : ImageHandler
