@@ -20,10 +20,8 @@ namespace WatermarkingImage
         {
 
             var imageWithWatermark = _helper.WatermarkImage(context.Request.Path);
-            if (imageWithWatermark.Length == 0)
-            {
-                return;
-            }
+            if (imageWithWatermark.Length == 0) return;
+                
             context.Response.OutputStream.Write(imageWithWatermark, 0, imageWithWatermark.Length);
         }
 
